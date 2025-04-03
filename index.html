@@ -7,7 +7,7 @@
     <style>
         /* Reset and Base Styles */
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
-        
+
         * {
             margin: 0;
             padding: 0;
@@ -16,39 +16,12 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1a1a1a, #000000);
-            color: #ffffff;
+            background: #ffffff;
+            color: #333333;
             min-height: 100vh;
             line-height: 1.6;
             position: relative;
             overflow-x: hidden;
-        }
-        
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(184, 134, 11, 0.8), rgba(105, 105, 105, 0.6));
-            z-index: -1;
-            pointer-events: none;
-        }
-        
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.0/collection/components/icon/svg/film-outline.svg');
-            background-repeat: repeat;
-            background-size: 300px;
-            opacity: 0.03;
-            z-index: -1;
-            pointer-events: none;
         }
 
         .container {
@@ -60,62 +33,82 @@
         /* Header Styles */
         header {
             text-align: center;
-            padding: 60px 0;
+            padding: 30px 0;
         }
 
         h1 {
-            font-size: 4.5rem;
-            margin-bottom: 20px;
-            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+            font-size: 3rem;
+            margin-bottom: 10px; /* Adjusted margin */
             font-weight: 900;
-            background: linear-gradient(to right, #ffd700, #b8860b);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #000000;
             position: relative;
             display: inline-block;
-        }
-        
-        h1::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 150px;
-            height: 4px;
-            background: linear-gradient(to right, #ffd700, #b8860b);
-            border-radius: 2px;
         }
 
         h2 {
             font-size: 2.5rem;
             margin-bottom: 30px;
             text-align: center;
+            color: #333333;
         }
 
         h3 {
             font-size: 1.8rem;
             margin-bottom: 20px;
+            color: #333333;
         }
 
         p {
             margin-bottom: 20px;
             font-size: 1.1rem;
+            color: #333333;
         }
 
-        /* Navigation */
+        /* Top Navigation (will be positioned below header) */
+        .top-nav {
+            display: flex;
+            justify-content: flex-end; /* Align buttons to the right */
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 20px; /* Added margin to separate from header text */
+        }
+
+        .top-nav .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .top-nav .auth-button {
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .signup-btn {
+            background-color: #b8860b;
+            color: white;
+        }
+
+        .login-btn {
+            border: 1px solid #b8860b;
+            color: #b8860b;
+        }
+
+        .auth-button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Content Navigation */
         nav {
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 50px;
-            padding: 5px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 10px;
             margin-bottom: 40px;
-            position: sticky;
-            top: 20px;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
-                        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         nav ul {
@@ -129,61 +122,43 @@
         }
 
         nav ul li a {
-            color: #ffffff;
+            color: #333333;
             text-decoration: none;
             font-size: 1.1rem;
             font-weight: 500;
             padding: 12px 25px;
-            border-radius: 50px;
+            border-radius: 8px;
             display: inline-block;
             transition: all 0.3s;
-            position: relative;
-            z-index: 1;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        nav ul li a::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, #b8860b, #ffd700);
-            border-radius: 50px;
-            opacity: 0;
-            z-index: -1;
-            transition: opacity 0.3s, transform 0.3s;
-            transform: scale(0.9);
         }
 
         nav ul li a:hover {
-            color: #000;
-            transform: translateY(-2px);
-        }
-        
-        nav ul li a:hover::before {
-            opacity: 1;
-            transform: scale(1);
+            background-color: #e0e0e0;
         }
 
         /* Info Card Styles */
         .info-card {
-            background: linear-gradient(145deg, rgba(30, 30, 30, 0.8), rgba(20, 20, 20, 0.9));
+            background: #a0522d; /* Dark dark gold/brown color */
+            color: #ffffff; /* Changed text color for better contrast */
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 40px;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border-left: 4px solid #b8860b;
-            transform: translateZ(0);
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        
+
+        .info-card h2, .info-card h3 {
+            color: #ffffff; /* Ensure headings in info cards are white */
+        }
+
+        .info-card p, .info-card ul, .info-card li {
+            color: #f0f0f0; /* Slightly lighter text for readability */
+        }
+
         .info-card:hover {
-            transform: translateY(-5px) translateZ(0);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
         /* Infographic Styles */
@@ -192,38 +167,22 @@
             flex-wrap: wrap;
             justify-content: space-between;
             margin: 40px 0;
-            perspective: 1000px;
         }
 
         .infographic {
-            background: linear-gradient(135deg, rgba(40, 40, 40, 0.9), rgba(20, 20, 20, 0.95));
+            background: #f5f5f5;
             border-radius: 15px;
             padding: 25px;
             flex-basis: calc(50% - 20px);
             margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             border-top: 3px solid #b8860b;
-            transform: translateZ(0);
             transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
         }
-        
-        .infographic::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
-            transform: rotate(-45deg);
-            pointer-events: none;
-        }
-        
+
         .infographic:hover {
-            transform: translateY(-8px) rotateX(2deg) rotateY(2deg) translateZ(0);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .valuation-table {
@@ -235,11 +194,11 @@
         .valuation-table th, .valuation-table td {
             padding: 12px 15px;
             text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid #e0e0e0;
         }
 
         .valuation-table th {
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: #f0f0f0;
             font-weight: bold;
         }
 
@@ -249,36 +208,16 @@
 
         .scoring-list li {
             padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid #e0e0e0;
         }
 
         /* Call to Action */
         .cta {
             text-align: center;
-            padding: 80px 0;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('/api/placeholder/1200/400');
-            background-size: cover;
-            background-position: center;
+            padding: 60px 0;
+            background: #f0f0f0;
             border-radius: 20px;
             margin: 60px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(184, 134, 11, 0.3), transparent);
-            z-index: 1;
-        }
-        
-        .cta h2, .cta p {
-            position: relative;
-            z-index: 2;
         }
 
         .btn {
@@ -287,33 +226,52 @@
             background-size: 200% auto;
             color: #000;
             padding: 16px 40px;
-            border-radius: 50px;
+            border-radius: 8px;
             text-decoration: none;
             font-size: 1.3rem;
             font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
             transition: all 0.5s;
-            position: relative;
-            z-index: 2;
-            box-shadow: 0 5px 15px rgba(184, 134, 11, 0.4);
+            box-shadow: 0 4px 10px rgba(184, 134, 11, 0.3);
         }
 
         .btn:hover {
             background-position: right center;
             transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 10px 25px rgba(184, 134, 11, 0.6);
+            box-shadow: 0 6px 15px rgba(184, 134, 11, 0.4);
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 40px 0;
-            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px 0;
+            background-color: #f5f5f5;
             margin-top: 60px;
+            color: #666666;
         }
 
-        /* Responsive Design */
+        /* Scroll to Top Button */
+        #scroll-to-top {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #b8860b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        #scroll-to-top:hover {
+            opacity: 1;
+        }
+
         @media (max-width: 768px) {
             .infographic {
                 flex-basis: 100%;
@@ -327,6 +285,17 @@
             nav ul li {
                 margin: 10px 0;
             }
+
+            .top-nav {
+                flex-direction: row; /* Adjusted to keep buttons in a row on mobile */
+                justify-content: center; /* Center the buttons on mobile */
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+
+            #scroll-to-top {
+                display: block; /* Show on mobile */
+            }
         }
     </style>
 </head>
@@ -337,18 +306,15 @@
             <p>Create your dream team of blockbusters and compete with friends!</p>
         </header>
 
-        <nav>
-            <ul>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#league-setup">League Setup</a></li>
-                <li><a href="#movie-valuation">Movie Valuation</a></li>
-                <li><a href="#scoring">Scoring System</a></li>
-                <li><a href="#prizes">Prizes</a></li>
-            </ul>
-        </nav>
+        <div class="top-nav">
+            <div class="auth-buttons">
+                <a href="#" class="auth-button signup-btn">Sign-Up</a>
+                <a href="#" class="auth-button login-btn">Login</a>
+            </div>
+        </div>
 
         <section id="how-it-works" class="info-card">
-            <h2>How MFL Works</h2>
+            <h2>What is MFL?</h2>
             <p>Movie Fantasy League (MFL) brings the excitement of fantasy sports to the world of cinema. Draft upcoming movies, track their real-world performance, and compete with friends to see whose film portfolio reigns supreme!</p>
             <p>Whether you're a casual moviegoer or a dedicated cinephile, MFL offers a fun new way to engage with the films you love while testing your box office prediction skills.</p>
         </section>
@@ -374,7 +340,7 @@
         <h2 id="movie-valuation">Movie Valuation</h2>
         <div class="info-card">
             <p>Movies are assigned values based on their anticipated performance, including projected box office, star power, and critical reception potential.</p>
-            
+
             <table class="valuation-table">
                 <thead>
                     <tr>
@@ -448,10 +414,9 @@
             <p>Movies earn points as they're released, keeping the competition exciting all year long!</p>
         </div>
 
-        <h2 id="prizes">End-of-Season & Prizes</h2>
+        <h2 id="prizes">Endgame</h2>
         <div class="info-card">
-            <p>The MFL season concludes at a predetermined date (such as Oscar night or the end of the calendar year).</p>
-            <p>The manager with the highest total points is crowned the champion! Leagues can set their own stakes:</p>
+            <p>The MFL season concludes at a predetermined date (such as Oscar night or the end of the calendar year). Before the season even begins, leagues can define their custom prizes based on final league positioning. No way out of this one. Looking at you, Ryan. Avenge your friends to avoid losing!</p>
             <ul>
                 <li>Cash prize pools</li>
                 <li>Trophy or memorabilia</li>
@@ -467,33 +432,32 @@
         </div>
     </div>
 
+    <button id="scroll-to-top" title="Go to top">^</button>
+
+    <script>
+        // Get the scroll-to-top button
+        let scrollToTopButton = document.getElementById("scroll-to-top");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopButton.style.display = "block";
+            } else {
+                scrollToTopButton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        scrollToTopButton.addEventListener('click', function() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        });
+    </script>
+
     <footer>
         <p>&copy; 2025 Movie Fantasy League (MFL). All rights reserved.</p>
     </footer>
-
-    <script>
-        // Simple script for smooth scrolling to anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Script for darkening the gradient as user scrolls down
-        window.addEventListener('scroll', function() {
-            const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-            const darkening = Math.min(scrollPercentage * 0.5, 0.5); // Max darkening of 50%
-            
-            document.body.style.background = `linear-gradient(to bottom, rgba(184, 134, 11, ${1 - darkening}), rgba(105, 105, 105, ${1 - darkening * 0.5}))`;
-        });
-    </script>
 </body>
 </html>
