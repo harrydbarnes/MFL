@@ -5,299 +5,299 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Fantasy League</title>
     <style>
-        /* Reset and Base Styles */
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+    /* Reset and Base Styles */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', Arial, sans-serif;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', Arial, sans-serif;
+    }
 
-        body {
-            background: #ffffff;
-            color: #333333;
-            min-height: 100vh;
-            line-height: 1.6;
-            position: relative;
-            overflow-x: hidden;
-        }
+    body {
+        background: #ffffff;
+        color: #333333;
+        min-height: 100vh;
+        line-height: 1.6;
+        position: relative;
+        overflow-x: hidden;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
-        /* Header Styles */
-        header {
-            text-align: center;
-            padding: 30px 0;
-        }
+    /* Header Styles */
+    header {
+        text-align: center;
+        padding: 30px 0;
+    }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px; /* Adjusted margin */
-            font-weight: 900;
-            color: #000000;
-            position: relative;
-            display: inline-block;
-        }
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 10px; /* Adjusted margin */
+        font-weight: 900;
+        color: #000000;
+        position: relative;
+        display: inline-block;
+    }
 
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            text-align: center;
-            color: #333333;
-        }
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        text-align: center;
+        color: #333333;
+    }
 
-        h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: #333333;
-        }
+    h3 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #333333;
+    }
 
-        p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: #333333;
-        }
+    p {
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+        color: #333333;
+    }
 
-        /* Top Navigation (will be positioned below header) */
-        .top-nav {
-            display: flex;
-            justify-content: flex-end; /* Align buttons to the right */
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #e0e0e0;
-            margin-bottom: 20px; /* Added margin to separate from header text */
-        }
+    /* Top Navigation (will be positioned below header) */
+    .top-nav {
+        display: flex;
+        justify-content: flex-end; /* Align buttons to the right */
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 20px; /* Added margin to separate from header text */
+    }
 
-        .top-nav .auth-buttons {
-            display: flex;
-            gap: 15px;
-        }
+    .top-nav .auth-buttons {
+        display: flex;
+        gap: 15px;
+    }
 
-        .top-nav .auth-button {
-            padding: 8px 20px;
-            border-radius: 4px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
+    .top-nav .auth-button {
+        padding: 8px 20px;
+        border-radius: 4px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
 
-        .signup-btn {
-            background-color: #b8860b;
-            color: white;
-        }
+    .signup-btn {
+        background-color: #b8860b;
+        color: white;
+    }
 
-        .login-btn {
-            border: 1px solid #b8860b;
-            color: #b8860b;
-        }
+    .login-btn {
+        border: 1px solid #b8860b;
+        color: #b8860b;
+    }
 
-        .auth-button:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
+    .auth-button:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
 
-        /* Content Navigation */
-        nav {
-            background: #f5f5f5;
-            border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 40px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Content Navigation */
+    nav {
+        background: #f5f5f5;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 40px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+    }
+
+    nav ul li {
+        margin: 0 5px;
+    }
+
+    nav ul li a {
+        color: #333333;
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 500;
+        padding: 12px 25px;
+        border-radius: 8px;
+        display: inline-block;
+        transition: all 0.3s;
+    }
+
+    nav ul li a:hover {
+        background-color: #e0e0e0;
+    }
+
+    /* Info Card Styles */
+    .info-card {
+        background: #f5f5f5; /* Changed background to match other cards */
+        color: #333333; /* Reverted text color */
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid #b8860b;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .info-card h2, .info-card h3 {
+        color: #333333; /* Reverted heading color */
+    }
+
+    .info-card p, .info-card ul, .info-card li {
+        color: #333333; /* Reverted paragraph color */
+    }
+
+    .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Infographic Styles */
+    .infographic-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 40px 0;
+    }
+
+    .infographic {
+        background: #f5f5f5;
+        border-radius: 15px;
+        padding: 25px;
+        flex-basis: calc(50% - 20px);
+        margin-bottom: 40px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-top: 3px solid #b8860b;
+        transition: all 0.4s ease;
+    }
+
+    .infographic:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .valuation-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+    .valuation-table th, .valuation-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .valuation-table th {
+        background-color: #f0f0f0;
+        font-weight: bold;
+    }
+
+    .scoring-list {
+        list-style-type: none;
+    }
+
+    .scoring-list li {
+        padding: 10px 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    /* Call to Action */
+    .cta {
+        text-align: center;
+        padding: 60px 0;
+        background: #f0f0f0;
+        border-radius: 20px;
+        margin: 60px 0;
+    }
+
+    .btn {
+        display: inline-block;
+        background: linear-gradient(to right, #b8860b, #ffd700, #b8860b);
+        background-size: 200% auto;
+        color: #000;
+        padding: 16px 40px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 1.3rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.5s;
+        box-shadow: 0 4px 10px rgba(184, 134, 11, 0.3);
+    }
+
+    .btn:hover {
+        background-position: right center;
+        transform: scale(1.05) translateY(-3px);
+        box-shadow: 0 6px 15px rgba(184, 134, 11, 0.4);
+    }
+
+    /* Footer */
+    footer {
+        text-align: center;
+        padding: 30px 0;
+        background-color: #f5f5f5;
+        margin-top: 60px;
+        color: #666666;
+    }
+
+    /* Scroll to Top Button */
+    #scroll-to-top {
+        display: none; /* Hidden by default */
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #b8860b;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 1rem;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+    }
+
+    #scroll-to-top:hover {
+        opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+        .infographic {
+            flex-basis: 100%;
         }
 
         nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
+            flex-direction: column;
+            align-items: center;
         }
 
         nav ul li {
-            margin: 0 5px;
+            margin: 10px 0;
         }
 
-        nav ul li a {
-            color: #333333;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            padding: 12px 25px;
-            border-radius: 8px;
-            display: inline-block;
-            transition: all 0.3s;
+        .top-nav {
+            flex-direction: row; /* Adjusted to keep buttons in a row on mobile */
+            justify-content: center; /* Center the buttons on mobile */
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
-        nav ul li a:hover {
-            background-color: #e0e0e0;
-        }
-
-        /* Info Card Styles */
-        .info-card {
-            background: #a0522d; /* Dark dark gold/brown color */
-            color: #ffffff; /* Changed text color for better contrast */
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid #b8860b;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .info-card h2, .info-card h3 {
-            color: #ffffff; /* Ensure headings in info cards are white */
-        }
-
-        .info-card p, .info-card ul, .info-card li {
-            color: #f0f0f0; /* Slightly lighter text for readability */
-        }
-
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Infographic Styles */
-        .infographic-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin: 40px 0;
-        }
-
-        .infographic {
-            background: #f5f5f5;
-            border-radius: 15px;
-            padding: 25px;
-            flex-basis: calc(50% - 20px);
-            margin-bottom: 40px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border-top: 3px solid #b8860b;
-            transition: all 0.4s ease;
-        }
-
-        .infographic:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .valuation-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        .valuation-table th, .valuation-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .valuation-table th {
-            background-color: #f0f0f0;
-            font-weight: bold;
-        }
-
-        .scoring-list {
-            list-style-type: none;
-        }
-
-        .scoring-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        /* Call to Action */
-        .cta {
-            text-align: center;
-            padding: 60px 0;
-            background: #f0f0f0;
-            border-radius: 20px;
-            margin: 60px 0;
-        }
-
-        .btn {
-            display: inline-block;
-            background: linear-gradient(to right, #b8860b, #ffd700, #b8860b);
-            background-size: 200% auto;
-            color: #000;
-            padding: 16px 40px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.5s;
-            box-shadow: 0 4px 10px rgba(184, 134, 11, 0.3);
-        }
-
-        .btn:hover {
-            background-position: right center;
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 6px 15px rgba(184, 134, 11, 0.4);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            background-color: #f5f5f5;
-            margin-top: 60px;
-            color: #666666;
-        }
-
-        /* Scroll to Top Button */
         #scroll-to-top {
-            display: none; /* Hidden by default */
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #b8860b;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 1rem;
-            opacity: 0.7;
-            transition: opacity 0.3s;
+            display: block; /* Show on mobile */
         }
-
-        #scroll-to-top:hover {
-            opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-            .infographic {
-                flex-basis: 100%;
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav ul li {
-                margin: 10px 0;
-            }
-
-            .top-nav {
-                flex-direction: row; /* Adjusted to keep buttons in a row on mobile */
-                justify-content: center; /* Center the buttons on mobile */
-                gap: 15px;
-                margin-bottom: 20px;
-            }
-
-            #scroll-to-top {
-                display: block; /* Show on mobile */
-            }
-        }
-    </style>
+    }
+</style>         
 </head>
 <body>
     <div class="container">
