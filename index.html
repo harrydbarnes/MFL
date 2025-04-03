@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Fantasy League</title>
+    <style>
+        /* Reset and Base Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #000000);
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(184, 134, 11, 0.8), rgba(105, 105, 105, 0.6));
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.0/collection/components/icon/svg/film-outline.svg');
+            background-repeat: repeat;
+            background-size: 300px;
+            opacity: 0.03;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+            font-weight: 900;
+            background: linear-gradient(to right, #ffd700, #b8860b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(to right, #ffd700, #b8860b);
+            border-radius: 2px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 50px;
+            padding: 5px;
+            margin-bottom: 40px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 5px;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 12px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        nav ul li a::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #b8860b, #ffd700);
+            border-radius: 50px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: scale(0.9);
+        }
+
+        nav ul li a:hover {
+            color: #000;
+            transform: translateY(-2px);
+        }
+        
+        nav ul li a:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Info Card Styles */
+        .info-card {
+            background: linear-gradient(145deg, rgba(30, 30, 30, 0.8), rgba(20, 20, 20, 0.9));
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border-left: 4px solid #b8860b;
+            transform: translateZ(0);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px) translateZ(0);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Infographic Styles */
+        .infographic-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 40px 0;
+            perspective: 1000px;
+        }
+
+        .infographic {
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.9), rgba(20, 20, 20, 0.95));
+            border-radius: 15px;
+            padding: 25px;
+            flex-basis: calc(50% - 20px);
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-top: 3px solid #b8860b;
+            transform: translateZ(0);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .infographic::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            transform: rotate(-45deg);
+            pointer-events: none;
+        }
+        
+        .infographic:hover {
+            transform: translateY(-8px) rotateX(2deg) rotateY(2deg) translateZ(0);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .valuation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .valuation-table th, .valuation-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .valuation-table th {
+            background-color: rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+        }
+
+        .scoring-list {
+            list-style-type: none;
+        }
+
+        .scoring-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Call to Action */
+        .cta {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('/api/placeholder/1200/400');
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(184, 134, 11, 0.3), transparent);
+            z-index: 1;
+        }
+        
+        .cta h2, .cta p {
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #b8860b, #ffd700, #b8860b);
+            background-size: 200% auto;
+            color: #000;
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.5s;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(184, 134, 11, 0.4);
+        }
+
+        .btn:hover {
+            background-position: right center;
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 10px 25px rgba(184, 134, 11, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            margin-top: 60px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .infographic {
+                flex-basis: 100%;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Movie Fantasy League</h1>
+            <p>Create your dream team of blockbusters and compete with friends!</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#league-setup">League Setup</a></li>
+                <li><a href="#movie-valuation">Movie Valuation</a></li>
+                <li><a href="#scoring">Scoring System</a></li>
+                <li><a href="#prizes">Prizes</a></li>
+            </ul>
+        </nav>
+
+        <section id="how-it-works" class="info-card">
+            <h2>How MFL Works</h2>
+            <p>Movie Fantasy League (MFL) brings the excitement of fantasy sports to the world of cinema. Draft upcoming movies, track their real-world performance, and compete with friends to see whose film portfolio reigns supreme!</p>
+            <p>Whether you're a casual moviegoer or a dedicated cinephile, MFL offers a fun new way to engage with the films you love while testing your box office prediction skills.</p>
+        </section>
+
+        <h2 id="league-setup">League Setup & Drafting</h2>
+        <div class="infographic-container">
+            <div class="infographic">
+                <h3>Create or Join a League</h3>
+                <p>Start your own private league with friends or join a public league to compete with movie fans from around the world.</p>
+                <p>Each player gets a $100M budget to build their roster of upcoming films that will compete for points based on real-world performance.</p>
+            </div>
+            <div class="infographic">
+                <h3>Draft Your Dream Team</h3>
+                <p>Choose your draft format:</p>
+                <ul>
+                    <li><strong>Auction Draft:</strong> Bid on movies within your $100M budget limit</li>
+                    <li><strong>Snake Draft:</strong> Take turns selecting movies in a predetermined order</li>
+                </ul>
+                <p>Strategy is key! Do you go all-in on one blockbuster or build a diverse portfolio of films?</p>
+            </div>
+        </div>
+
+        <h2 id="movie-valuation">Movie Valuation</h2>
+        <div class="info-card">
+            <p>Movies are assigned values based on their anticipated performance, including projected box office, star power, and critical reception potential.</p>
+            
+            <table class="valuation-table">
+                <thead>
+                    <tr>
+                        <th>Movie Type</th>
+                        <th>Example</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Major Franchise Blockbuster</td>
+                        <td>Avengers: Secret Wars</td>
+                        <td>$45M</td>
+                    </tr>
+                    <tr>
+                        <td>Animated Family Film</td>
+                        <td>Inside Out 2</td>
+                        <td>$30M</td>
+                    </tr>
+                    <tr>
+                        <td>Mid-Budget Studio Film</td>
+                        <td>A24 Horror Film</td>
+                        <td>$15M</td>
+                    </tr>
+                    <tr>
+                        <td>Independent Drama</td>
+                        <td>Indie Drama</td>
+                        <td>$10M</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 id="scoring">Scoring System</h2>
+        <div class="infographic-container">
+            <div class="infographic">
+                <h3>Box Office Performance</h3>
+                <ul class="scoring-list">
+                    <li>$1M in box office earnings = 1 point</li>
+                    <li>Opening weekend bonus: Top 3 finish = 10 extra points</li>
+                </ul>
+            </div>
+            <div class="infographic">
+                <h3>Critical Reception</h3>
+                <ul class="scoring-list">
+                    <li>Rotten Tomatoes Critic Score: 1% = 1 point</li>
+                    <li>Rotten Tomatoes Audience Score: 1% = 1 point</li>
+                    <li>"Certified Fresh" status = 20 bonus points</li>
+                </ul>
+            </div>
+            <div class="infographic">
+                <h3>Awards & Recognition</h3>
+                <ul class="scoring-list">
+                    <li>Major Award Nomination = 5 points</li>
+                    <li>Major Award Win = 10 points</li>
+                    <li>Oscar Best Picture Win = 25 bonus points</li>
+                </ul>
+            </div>
+            <div class="infographic">
+                <h3>Streaming Performance</h3>
+                <ul class="scoring-list">
+                    <li>Top 10 on major platform = 5 points per week</li>
+                    <li>#1 position on major platform = 10 points per week</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>League Progression</h2>
+        <div class="info-card">
+            <p>Track your score on a live leaderboard as your movies are released throughout the year. Make strategic trades with other players to maximize your points potential.</p>
+            <p>Movies earn points as they're released, keeping the competition exciting all year long!</p>
+        </div>
+
+        <h2 id="prizes">End-of-Season & Prizes</h2>
+        <div class="info-card">
+            <p>The MFL season concludes at a predetermined date (such as Oscar night or the end of the calendar year).</p>
+            <p>The manager with the highest total points is crowned the champion! Leagues can set their own stakes:</p>
+            <ul>
+                <li>Cash prize pools</li>
+                <li>Trophy or memorabilia</li>
+                <li>Bragging rights</li>
+                <li>Custom league rewards</li>
+            </ul>
+        </div>
+
+        <div class="cta">
+            <h2>Ready to Play?</h2>
+            <p>Join the Movie Fantasy League today and put your film prediction skills to the test!</p>
+            <a href="#" class="btn">Sign Up Now</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Movie Fantasy League (MFL). All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Simple script for smooth scrolling to anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Script for darkening the gradient as user scrolls down
+        window.addEventListener('scroll', function() {
+            const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+            const darkening = Math.min(scrollPercentage * 0.5, 0.5); // Max darkening of 50%
+            
+            document.body.style.background = `linear-gradient(to bottom, rgba(184, 134, 11, ${1 - darkening}), rgba(105, 105, 105, ${1 - darkening * 0.5}))`;
+        });
+    </script>
+</body>
+</html>
