@@ -61,6 +61,7 @@
     h3 {
         font-size: 1.8rem;
         margin-bottom: 20px;
+        text-align: center;
         color: #4c3a0c;
     }
 
@@ -175,6 +176,21 @@
         margin: 40px 0;
     }
 
+.first-section p,
+.first-infographic .infographic p {
+    text-align: justify; /* Justify the text */
+    /* Additional centering within the card */
+    /*display: flex; /* Use flexbox for centering */
+    /*flex-direction: column; /* Stack content vertically */
+    /*justify-content: center; /* Center vertically */
+    /*align-items: center; /* Center horizontally */
+}
+
+.first-infographic {
+    display: flex;
+    justify-content: center;
+}
+        
     .infographic {
         background: #f5f5f5;
         border-radius: 15px;
@@ -320,36 +336,36 @@
             </div>
         </div>
 
-        <section id="how-it-works" class="info-card">
-            <h2>What is <span style="color: #7f6115;">Movie Fantasy League</span>?</h2>
-            <p><span style="color: #7f6115;">Movie Fantasy League</span> (MFL) brings the excitement of fantasy sports to the world of cinema. Draft upcoming movies, track their real-world performance, and compete with friends to see whose film portfolio reigns supreme!</p>
-            <br>
-            <p>Whether you're a casual moviegoer or a dedicated cinephile, MFL offers a fun new way to engage with the films you love while testing your box office prediction skills.</p>
-            <br>
-            <p>How will you win your league? Remember, strategy is key! Do you go all-in on one blockbuster or build a diverse portfolio of films?</p>
-            <br>
-            <p>The choice is yours. Welcome to <span style="color: #7f6115;">Movie Fantasy League</span>!</p>
-        </section>
+       <section id="how-it-works" class="info-card first-section">
+    <h2>What is <span style="color: #7f6115;">Movie Fantasy League</span>?</h2>
+    <p><span style="color: #7f6115;">Movie Fantasy League</span> (MFL) brings the excitement of fantasy sports to the world of cinema. Draft upcoming movies, track their real-world performance, and compete with friends to see whose film portfolio reigns supreme!</p>
+    <br>
+    <p>Whether you're a casual moviegoer or a dedicated cinephile, MFL offers a fun new way to engage with the films you love while testing your box office prediction skills.</p>
+    <br>
+    <p>How will you win your league? Remember, strategy is key! Do you go all-in on one blockbuster or build a diverse portfolio of films?</p>
+    <br>
+    <p>The choice is yours. Welcome to <span style="color: #7f6115;">Movie Fantasy League</span>!</p>
+</section>
 
         <h2 id="league-setup">League Setup</h2>
-        <div class="infographic-container">
-            <div class="infographic">
-                <h3>Create or Join a League</h3>
-                <p>Start your own private league with friends or join a public league to compete with movie fans from around the world.</p>
-                <br>
-                <p>Each player gets a $100M budget to build their roster of upcoming films that will compete for points based on real-world performance.</p>
-            </div>
-            <div class="infographic">
-                <h3>Choose your League Format</h3>
-                <ul>
-                    <li><strong>Classic:</strong> Assemble your movies for the year within your $100M budget limit</li>
-                    <li><strong>Draft:</strong> Take turns selecting movies in a predetermined order</li>
-                    <li><strong>Prediction:</strong> Simply predict how much a film will make worldwide. Closer you are, the more points you gain!</li>
-                </ul>
-                <br>
-                <p>Strategy is key! Do you go all-in on one blockbuster or build a diverse portfolio of films?</p>
-            </div>
-        </div>
+<div class="infographic-container first-infographic">
+    <div class="infographic">
+        <h3>Create or Join a League</h3>
+        <p>Start your own private league with friends or join a public league to compete with movie fans from around the world.</p>
+        <br>
+        <p>Each player gets a $100M budget to build their roster of upcoming films that will compete for points based on real-world performance.</p>
+    </div>
+    <div class="infographic">
+        <h3>Choose your league format</h3>
+        <ul>
+            <li><strong>Classic:</strong> Assemble your movies for the year within your $100M budget limit</li>
+            <li><strong>Draft:</strong> Take turns selecting movies in a predetermined order</li>
+            <li><strong>Prediction:</strong> Simply predict how much a film will make worldwide. Closer you are, the more points you gain!</li>
+        </ul>
+        <br>
+        <p>Strategy is key! Do you go all-in on one blockbuster or build a diverse portfolio of films?</p>
+    </div>
+</div>
 
         <h2 id="movie-valuation">Movie Valuation</h2>
         <div class="info-card">
