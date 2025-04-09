@@ -209,12 +209,33 @@
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
+    .league-format-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+    .league-format-table th, .vleague-format-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .league-format-table th {
+        background-color: #f0f0f0;
+        font-weight: bold;
+    }
+        
     .valuation-table {
         width: 100%;
         border-collapse: collapse;
         margin: 20px 0;
     }
 
+.league-format-table tbody td:first-child {
+    font-weight: bold;
+}
+        
     .valuation-table th, .valuation-table td {
         padding: 12px 15px;
         text-align: left;
@@ -363,13 +384,7 @@
             </div>
             <div class="infographic">
                 <h3>Choose your League Format</h3>
-            <table class="valuation-table">
-                <thead>
-                    <tr>
-                        <th>League Type</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
+            <table class="league-format-table">
                 <tbody>
                     <tr>
                         <td>Classic</td>
