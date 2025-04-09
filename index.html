@@ -22,6 +22,7 @@
         line-height: 1.6;
         position: relative;
         overflow-x: hidden;
+        scroll-behavior: smooth;
     }
 
     .container {
@@ -316,9 +317,14 @@
         </div>
 
         <section id="how-it-works" class="info-card">
-            <h2>What is MFL?</h2>
-            <p>Movie Fantasy League (MFL) brings the excitement of fantasy sports to the world of cinema. Draft upcoming movies, track their real-world performance, and compete with friends to see whose film portfolio reigns supreme!</p>
+            <h2>What is <span style="color: #7f6115;">Movie Fantasy League</span>?</h2>
+            <p><span style="color: #7f6115;">Movie Fantasy League</span> (MFL) brings the excitement of fantasy sports to the world of cinema. Draft upcoming movies, track their real-world performance, and compete with friends to see whose film portfolio reigns supreme!</p>
+            <br>
             <p>Whether you're a casual moviegoer or a dedicated cinephile, MFL offers a fun new way to engage with the films you love while testing your box office prediction skills.</p>
+            <br>
+            <p>How will you win your league? Remember, strategy is key! Do you go all-in on one blockbuster or build a diverse portfolio of films?</p>
+            <br>
+            <p>The choice is yours. Welcome to <span style="color: #7f6115;">Movie Fantasy League</span>!</p>
         </section>
 
         <h2 id="league-setup">League Setup</h2>
@@ -452,11 +458,6 @@
             }
         }
 
-        // When the user clicks on the button, scroll to the top of the document
-        scrollToTopButton.addEventListener('click', function() {
-            document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-        });
     </script>
 
     <footer>
