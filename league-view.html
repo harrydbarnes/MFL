@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Fantasy League - League View</title>
+    <style>
+    /* Reset and Base Styles */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', Arial, sans-serif;
+    }
+
+    body {
+        background: #ffffff;
+        color: #333333;
+        min-height: 100vh;
+        line-height: 1.6;
+        position: relative;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Header Styles */
+    header {
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    p {
+        text-align: center;
+    }
+        
+    h1 {
+        font-size: 2.5rem; /* Reduced font size */
+        margin-bottom: 5px; /* Further adjusted margin */
+        font-weight: 900;
+        color: #7f6115;
+        position: relative;
+        display: inline-block;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        text-align: center;
+        color: #4c3a0c;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #4c3a0c;
+    }
+
+    header p { /* Targeting the specific paragraph in the header */
+        margin-bottom: 10px; /* Reduced margin to close the gap */
+        font-size: 1.1rem;
+        color: #333333;
+    }
+
+    /* Top Navigation (will be positioned below header) */
+    .top-nav {
+        display: flex;
+        justify-content: center; /* Align buttons to the right */
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 20px; /* Added margin to separate from header text */
+    }
+
+    .top-nav .auth-buttons {
+        display: flex;
+        gap: 15px;
+    }
+
+    .top-nav .auth-button {
+        padding: 8px 20px;
+        border-radius: 4px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+
+    .signup-btn {
+        background-color: #b8860b;
+        color: white;
+    }
+
+    .login-btn {
+        border: 1px solid #b8860b;
+        color: #b8860b;
+    }
+
+    .viewleague-btn {
+        border: 1px solid #b8860b;
+        color: #b8860b;
+    }
+
+    .auth-button:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+
+    /* Content Navigation */
+    nav {
+        background: #f5f5f5;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 40px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+    }
+
+    nav ul li {
+        margin: 0 5px;
+    }
+
+    nav ul li a {
+        color: #333333;
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 500;
+        padding: 12px 25px;
+        border-radius: 8px;
+        display: inline-block;
+        transition: all 0.3s;
+    }
+
+    nav ul li a:hover {
+        background-color: #e0e0e0;
+    }
+
+    /* Info Card Styles */
+    .info-card {
+        background: #f5f5f5; /* Changed background to match other cards */
+        color: #333333; /* Reverted text color */
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid #b8860b;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .info-card h2, .info-card h3 {
+        color: #4c3a0c; /* Reverted heading color */
+    }
+
+    .info-card p, .info-card ul, .info-card li {
+        color: #333333; /* Reverted paragraph color */
+    }
+
+    .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    /* League Search Styles */
+    .search-container {
+        max-width: 600px;
+        margin: 0 auto 40px;
+    }
+
+    .search-box {
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    .search-input {
+        flex-grow: 1;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px 0 0 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: #b8860b;
+    }
+
+    .search-button {
+        background-color: #b8860b;
+        color: white;
+        border: none;
+        padding: 0 20px;
+        border-radius: 0 8px 8px 0;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background-color 0.3s;
+    }
+
+    .search-button:hover {
+        background-color: #a67c0c;
+    }
+
+    .search-results {
+        background: #f5f5f5;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: none;
+    }
+
+    .search-results ul {
+        list-style: none;
+    }
+
+    .search-results li {
+        padding: 10px;
+        border-bottom: 1px solid #e0e0e0;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .search-results li:last-child {
+        border-bottom: none;
+    }
+
+    .search-results li:hover {
+        background-color: #e8e8e8;
+    }
+
+    /* League Table Styles */
+    .league-view-section {
+        display: none;
+    }
+
+    .league-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+    .league-table th, .league-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .league-table th {
+        background-color: #f0f0f0;
+        font-weight: bold;
+    }
+
+    .league-table tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .league-table tbody tr:first-child {
+        background-color: #fff6dd;
+    }
+
+    /* Footer */
+    footer {
+        text-align: center;
+        padding: 30px 0;
+        background-color: #f5f5f5;
+        margin-top: 60px;
+        color: #666666;
+    }
+
+    /* Scroll to Top Button */
+    #scroll-to-top {
+        display: none; /* Hidden by default */
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #b8860b;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 1rem;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+    }
+
+    #scroll-to-top:hover {
+        opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+        .search-box {
+            flex-direction: column;
+        }
+
+        .search-input {
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .search-button {
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        nav ul {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 10px 0;
+        }
+
+        .top-nav {
+            flex-direction: row; /* Adjusted to keep buttons in a row on mobile */
+            justify-content: center; /* Center the buttons on mobile */
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        #scroll-to-top {
+            display: block; /* Show on mobile */
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Movie Fantasy League</h1>
+            <p>Create your dream team of blockbusters and compete with friends!</p>
+        </header>
+
+        <div class="top-nav">
+            <div class="auth-buttons">
+                <a href="#" class="auth-button signup-btn">Sign-Up</a>
+                <a href="#" class="auth-button login-btn">Login</a>
+                <a href="league-view.html" class="auth-button viewleague-btn">View League</a>
+            </div>
+        </div>
+
+        <!-- League Search Section -->
+        <section id="league-search" class="info-card">
+            <h2>Find Your League</h2>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="league-search-input" class="search-input" placeholder="Enter League ID or Name">
+                    <button id="search-button" class="search-button">Search</button>
+                </div>
+                <div id="search-results" class="search-results">
+                    <ul>
+                        <li data-league-id="1">Tornado Boys (ID: 1)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- League View Section -->
+        <section id="league-view" class="league-view-section">
+            <h2 id="league-name">League: Tornado Boys</h2>
+            
+            <!-- Navigation for League View -->
+            <nav>
+                <ul>
+                    <li><a href="#" id="league-table-link" class="active">League Table</a></li>
+                    <li><a href="#" id="upcoming-films-link">Upcoming Films</a></li>
+                    <li><a href="#" id="awards-won-link">Awards Won</a></li>
+                </ul>
+            </nav>
+            
+            <!-- League Table Content -->
+            <div id="league-table-content">
+                <table class="league-table">
+                    <thead>
+                        <tr>
+                            <th>Studio Name</th>
+                            <th>Points</th>
+                            <th>Awards</th>
+                            <th>Films To Be Released</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Olli Productions</td>
+                            <td>235</td>
+                            <td>3</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>Curt Films</td>
+                            <td>187</td>
+                            <td>1</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Harry Cinema</td>
+                            <td>156</td>
+                            <td>2</td>
+                            <td>5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Upcoming Films Content (Initially Hidden) -->
+            <div id="upcoming-films-content" style="display: none;">
+                <div class="info-card">
+                    <h3>Upcoming Film Releases</h3>
+                    <p>Check back soon to see the upcoming film releases for this league!</p>
+                </div>
+            </div>
+            
+            <!-- Awards Won Content (Initially Hidden) -->
+            <div id="awards-won-content" style="display: none;">
+                <div class="info-card">
+                    <h3>Awards Status</h3>
+                    <p>Check back soon to see award nominations and wins for this league!</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <button id="scroll-to-top" title="Go to top">Scroll Up</button>
+
+    <script>
+        // Search functionality
+        document.getElementById('search-button').addEventListener('click', function() {
+            const searchInput = document.getElementById('league-search-input').value.trim().toLowerCase();
+            const searchResults = document.getElementById('search-results');
+            
+            if (searchInput === "1" || searchInput === "tornado" || searchInput === "tornado boys") {
+                searchResults.style.display = "block";
+            } else {
+                searchResults.style.display = "none";
+                alert("No leagues found matching your search. Try searching for 'Tornado Boys' or ID '1'.");
+            }
+        });
+        
+        // League selection
+        document.querySelectorAll('#search-results li').forEach(item => {
+            item.addEventListener('click', function() {
+                const leagueId = this.getAttribute('data-league-id');
+                document.getElementById('league-search').style.display = "none";
+                document.getElementById('league-view').style.display = "block";
+                
+                // Change URL without page reload (history.pushState)
+                const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?league=" + leagueId;
+                window.history.pushState({path: newUrl}, '', newUrl);
+            });
+        });
+        
+        // Navigation tabs
+        document.getElementById('league-table-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('league-table-content').style.display = "block";
+            document.getElementById('upcoming-films-content').style.display = "none";
+            document.getElementById('awards-won-content').style.display = "none";
+        });
+        
+        document.getElementById('upcoming-films-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('league-table-content').style.display = "none";
+            document.getElementById('upcoming-films-content').style.display = "block";
+            document.getElementById('awards-won-content').style.display = "none";
+        });
+        
+        document.getElementById('awards-won-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('league-table-content').style.display = "none";
+            document.getElementById('upcoming-films-content').style.display = "none";
+            document.getElementById('awards-won-content').style.display = "block";
+        });
+        
+        // Check URL for league parameter on page load
+        window.addEventListener('load', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const leagueId = urlParams.get('league');
+            
+            if (leagueId === "1") {
+                document.getElementById('league-search').style.display = "none";
+                document.getElementById('league-view').style.display = "block";
+            }
+        });
+        
+        // Scroll to top functionality
+        let scrollToTopButton = document.getElementById("scroll-to-top");
+
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopButton.style.display = "block";
+            } else {
+                scrollToTopButton.style.display = "none";
+            }
+        }
+
+        scrollToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2025 Movie Fantasy League (MFL). All rights reserved.</p>
+    </footer>
+</body>
+</html>
