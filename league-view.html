@@ -218,6 +218,11 @@
         border-radius: 8px;
         padding: 10px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        opacity: 1;
+        transition: opacity 0.3s ease;
+    }
+
+    .search-results.hidden {
         display: none;
     }
 
@@ -240,9 +245,26 @@
         background-color: #e8e8e8;
     }
 
+    /* Error message style */
+    .error-message {
+        color: #d9534f;
+        font-weight: 500;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+        text-align: center;
+        display: none;
+    }
+
     /* League Table Styles */
     .league-view-section {
+        opacity: 0;
         display: none;
+        transition: opacity 0.5s ease;
+    }
+
+    .league-view-section.visible {
+        opacity: 1;
     }
 
     .league-table {
@@ -298,6 +320,17 @@
 
     #scroll-to-top:hover {
         opacity: 1;
+    }
+
+    /* Page transition effects */
+    .fade-out {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    .fade-in {
+        opacity: 1;
+        transition: opacity 0.5s ease;
     }
 
     @media (max-width: 768px) {
@@ -360,9 +393,14 @@
                     <input type="text" id="league-search-input" class="search-input" placeholder="Enter League ID or Name">
                     <button id="search-button" class="search-button">Search</button>
                 </div>
-                <div id="search-results" class="search-results">
-                    <ul>
+                <div id="error-message" class="error-message">
+                    *No league found- try again!*
+                </div>
+                <div id="search-results" class="search-results hidden">
+                    <ul id="results-list">
                         <li data-league-id="1">Tornado Boys (ID: 1)</li>
+                        <li data-league-id="2">Thunder Films (ID: 2)</li>
+                        <li data-league-id="3">Typhoon Pictures (ID: 3)</li>
                     </ul>
                 </div>
             </div>
@@ -436,31 +474,117 @@
     <button id="scroll-to-top" title="Go to top">Scroll Up</button>
 
     <script>
-        // Search functionality
-        document.getElementById('search-button').addEventListener('click', function() {
-            const searchInput = document.getElementById('league-search-input').value.trim().toLowerCase();
-            const searchResults = document.getElementById('search-results');
+        // Data for search
+        const leagues = [
+            { id: 1, name: "Tornado Boys" },
+            { id: 2, name: "Thunder Films" },
+            { id: 3, name: "Typhoon Pictures" },
+            { id: 4, name: "Hurricane Movies" },
+            { id: 5, name: "Cyclone Studios" }
+        ];
+        
+        // DOM elements
+        const searchInput = document.getElementById('league-search-input');
+        const searchButton = document.getElementById('search-button');
+        const searchResults = document.getElementById('search-results');
+        const resultsList = document.getElementById('results-list');
+        const errorMessage = document.getElementById('error-message');
+        const leagueSearch = document.getElementById('league-search');
+        const leagueView = document.getElementById('league-view');
+        
+        // Real-time search as user types
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim().toLowerCase();
             
-            if (searchInput === "1" || searchInput === "tornado" || searchInput === "tornado boys") {
-                searchResults.style.display = "block";
+            // Clear previous results
+            resultsList.innerHTML = '';
+            errorMessage.style.display = 'none';
+            
+            if (query.length > 0) {
+                // Filter leagues based on input
+                const filteredLeagues = leagues.filter(league => 
+                    league.name.toLowerCase().includes(query) || 
+                    league.id.toString().includes(query)
+                );
+                
+                if (filteredLeagues.length > 0) {
+                    // Display results
+                    filteredLeagues.forEach(league => {
+                        const li = document.createElement('li');
+                        li.textContent = `${league.name} (ID: ${league.id})`;
+                        li.setAttribute('data-league-id', league.id);
+                        li.addEventListener('click', selectLeague);
+                        resultsList.appendChild(li);
+                    });
+                    
+                    searchResults.classList.remove('hidden');
+                } else {
+                    searchResults.classList.add('hidden');
+                }
             } else {
-                searchResults.style.display = "none";
-                alert("No leagues found matching your search. Try searching for 'Tornado Boys' or ID '1'.");
+                searchResults.classList.add('hidden');
             }
         });
         
-        // League selection
-        document.querySelectorAll('#search-results li').forEach(item => {
-            item.addEventListener('click', function() {
-                const leagueId = this.getAttribute('data-league-id');
-                document.getElementById('league-search').style.display = "none";
-                document.getElementById('league-view').style.display = "block";
-                
-                // Change URL without page reload (history.pushState)
-                const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?league=" + leagueId;
-                window.history.pushState({path: newUrl}, '', newUrl);
-            });
+        // Handle search button click
+        searchButton.addEventListener('click', performSearch);
+        
+        // Handle Enter key press
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
         });
+        
+        // Search function
+        function performSearch() {
+            const query = searchInput.value.trim().toLowerCase();
+            
+            if (query.length > 0) {
+                const filteredLeagues = leagues.filter(league => 
+                    league.name.toLowerCase().includes(query) || 
+                    league.id.toString().includes(query)
+                );
+                
+                if (filteredLeagues.length === 0) {
+                    // Show error message
+                    errorMessage.style.display = 'block';
+                    searchResults.classList.add('hidden');
+                }
+            } else {
+                errorMessage.style.display = 'none';
+                searchResults.classList.add('hidden');
+            }
+        }
+        
+        // League selection with smooth transition
+        function selectLeague() {
+            const leagueId = this.getAttribute('data-league-id');
+            const leagueName = this.textContent.split(' (ID:')[0];
+            
+            // Update league name
+            document.getElementById('league-name').textContent = `League: ${leagueName}`;
+            
+            // Fade out search section
+            leagueSearch.classList.add('fade-out');
+            
+            // Wait for fade out, then switch sections
+            setTimeout(() => {
+                leagueSearch.style.display = 'none';
+                leagueView.style.display = 'block';
+                
+                // Trigger reflow
+                void leagueView.offsetWidth;
+                
+                // Add visible class to fade in league view
+                leagueView.classList.add('visible');
+                
+                // Change URL without page reload
+                const newUrl = window.location.protocol + "//" + window.location.host + 
+                               window.location.pathname + "?league=" + leagueId;
+                window.history.pushState({path: newUrl}, '', newUrl);
+            }, 500);
+        }
         
         // Navigation tabs
         document.getElementById('league-table-link').addEventListener('click', function(e) {
@@ -489,9 +613,15 @@
             const urlParams = new URLSearchParams(window.location.search);
             const leagueId = urlParams.get('league');
             
-            if (leagueId === "1") {
-                document.getElementById('league-search').style.display = "none";
-                document.getElementById('league-view').style.display = "block";
+            if (leagueId) {
+                const league = leagues.find(l => l.id.toString() === leagueId);
+                
+                if (league) {
+                    document.getElementById('league-name').textContent = `League: ${league.name}`;
+                    leagueSearch.style.display = "none";
+                    leagueView.style.display = "block";
+                    leagueView.classList.add('visible');
+                }
             }
         });
         
