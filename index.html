@@ -104,6 +104,11 @@
         color: #b8860b;
     }
 
+    .viewleague-btn {
+        border: 1px solid #b8860b;
+        color: #b8860b;
+    }
+
     .auth-button:hover {
         opacity: 0.9;
         transform: translateY(-2px);
@@ -503,7 +508,7 @@
     <button id="scroll-to-top" title="Go to top">Scroll Up</button>
 
     <script>
-        // Get the scroll-to-top button
+       // Get the scroll-to-top button
         let scrollToTopButton = document.getElementById("scroll-to-top");
 
         // When the user scrolls down 20px from the top of the document, show the button
@@ -517,12 +522,12 @@
             }
         }
 
-        // When the user clicks on the button, scroll to the top of the document
+        // When the user clicks on the button, smoothly scroll to the top of the document
         scrollToTopButton.addEventListener('click', function() {
-            // For modern browsers
-            document.documentElement.scrollTop = 0;
-            // For older browsers
-            document.body.scrollTop = 0;
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
     </script>
